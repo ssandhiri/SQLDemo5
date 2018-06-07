@@ -14,3 +14,5 @@ from (
 							Addrid desc ) as rnk
 	from [dbo].stg_Address_Union  WHERE  Flag = 2) X
 where rnk=1 and Clusterid is not null;
+
+hie everyone anmol here
