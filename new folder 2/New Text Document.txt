@@ -1,4 +1,7 @@
 hi everyone
+hi everyone
+hello all myself achyut
+whats new in the house
 select DIStinct Clusterid,Addrid,rnk
  into stg_Address_rnk
 from (
