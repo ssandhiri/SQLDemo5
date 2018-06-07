@@ -1,1 +1,16 @@
 hi everyone
+select DIStinct Clusterid,Addrid,rnk
+ into stg_Address_rnk
+from (
+	select *,
+	Row_Number() over ( partition by Clusterid 
+					order by (case when len(Address_n)>0 then len(Address_n)  else 0 end) desc, 
+							(case when len(Suite_N)>0 then 1 else 0 end) desc, 
+							(case when len(City_n)>0 then 1 else 0 end) desc, 
+							(case when len(State_N)>0 then 1 else 0 end) desc, 
+							(case when len(Zip_n)>0 then 1 else 0 end) desc, 
+							(case when len(Zip_Suffix_N)>0 then 1 else 0 end) desc, 
+							(case when len(Country_n)>0 then 1 else 0 end) desc, 
+							Addrid desc ) as rnk
+	from [dbo].stg_Address_Union  WHERE  Flag = 2) X
+where rnk=1 and Clusterid is not null;
